@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from cloudinary.models import CloudinaryField
+from django.core.validators import FileExtensionValidator
 
 User = get_user_model()
 
@@ -84,12 +84,9 @@ class JobApplication(models.Model):
 
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
     applicant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_applications')
-    resume = CloudinaryField(
-        'document',
-        folder='resumes/',
-        resource_type='raw',  # Use 'raw' for documents
-        blank=False,
-        null=False
+    resume = models.FileField(
+        upload_to='resumes/',
+        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx'])]
     )
     cover_letter = models.TextField(blank=True)
     years_of_experience = models.PositiveIntegerField(default=0)

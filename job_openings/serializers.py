@@ -1,9 +1,9 @@
-# job_openings/serializers.py
 from rest_framework import serializers
 from .models import Job, JobApplication
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+
 
 class JobSerializer(serializers.ModelSerializer):
     salary_range = serializers.ReadOnlyField()
@@ -33,22 +33,16 @@ class JobApplicationSerializer(serializers.ModelSerializer):
     company_name = serializers.CharField(source='job.company', read_only=True)
     applicant_name = serializers.CharField(source='applicant.get_full_name', read_only=True)
     applicant_email = serializers.CharField(source='applicant.email', read_only=True)
-    resume_url = serializers.SerializerMethodField()  # Add this field
 
     class Meta:
         model = JobApplication
         fields = [
             'id', 'job', 'job_title', 'company_name', 'applicant', 
-            'applicant_name', 'applicant_email', 'resume', 'resume_url', 'cover_letter',
+            'applicant_name', 'applicant_email', 'resume', 'cover_letter',
             'years_of_experience', 'linkedin_url', 'portfolio_url',
             'status', 'applied_at'
         ]
         read_only_fields = ['applicant', 'status']
-
-    def get_resume_url(self, obj):
-        if obj.resume:
-            return obj.resume.url  # This returns the Cloudinary URL
-        return None
 
 class JobApplicationCreateSerializer(serializers.ModelSerializer):
     class Meta:
