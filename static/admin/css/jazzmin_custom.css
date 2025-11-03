@@ -1,0 +1,359 @@
+/* static/admin/css/jazzmin_custom.css */
+:root {
+    --orange-primary: #f97316;
+    --orange-dark: #ea580c;
+    --orange-light: #fb923c;
+}
+
+/* ============================================
+   LOGIN & LOGOUT PAGE STYLING
+   ============================================ */
+
+/* Background gradient for login/logout pages */
+.login-page,
+.register-page {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%) !important;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Login box container */
+.login-box,
+.register-box {
+    width: 450px !important;
+    max-width: 90% !important;
+}
+
+/* Login card styling */
+.login-box .card,
+.register-box .card {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1) !important;
+    overflow: hidden !important;
+    border-top: 6px solid var(--orange-primary) !important;
+}
+
+/* Logo styling */
+.login-logo,
+.register-logo {
+    margin-bottom: 30px !important;
+    text-align: center !important;
+}
+
+.login-logo img,
+.register-logo img {
+    max-width: 150px !important;
+    max-height: 150px !important;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin: 0 auto 15px !important;
+    display: block !important;
+}
+
+.login-logo a,
+.register-logo a {
+    color: var(--orange-primary) !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    display: block !important;
+}
+
+/* Welcome text */
+.login-box .card-body,
+.register-box .card-body {
+    padding: 40px !important;
+    background: white !important;
+}
+
+.login-box .card-body p,
+.register-box .card-body p {
+    text-align: center !important;
+    color: #6b7280 !important;
+    font-size: 16px !important;
+    margin-bottom: 30px !important;
+    line-height: 1.6 !important;
+}
+
+/* Form inputs */
+.login-box input[type="text"],
+.login-box input[type="email"],
+.login-box input[type="password"],
+.register-box input[type="text"],
+.register-box input[type="email"],
+.register-box input[type="password"] {
+    border: 2px solid #e5e7eb !important;
+    border-radius: 10px !important;
+    padding: 12px 45px 12px 15px !important;
+    font-size: 15px !important;
+    transition: all 0.3s ease !important;
+    background: #f9fafb !important;
+}
+
+.login-box input[type="text"]:focus,
+.login-box input[type="email"]:focus,
+.login-box input[type="password"]:focus,
+.register-box input[type="text"]:focus,
+.register-box input[type="email"]:focus,
+.register-box input[type="password"]:focus {
+    border-color: var(--orange-primary) !important;
+    background: white !important;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1) !important;
+    outline: none !important;
+}
+
+/* Input icons */
+.login-box .input-group-text,
+.register-box .input-group-text {
+    background: transparent !important;
+    border: 2px solid #e5e7eb !important;
+    border-left: none !important;
+    border-radius: 0 10px 10px 0 !important;
+    color: #9ca3af !important;
+}
+
+.login-box .form-control:focus ~ .input-group-append .input-group-text,
+.register-box .form-control:focus ~ .input-group-append .input-group-text {
+    border-color: var(--orange-primary) !important;
+    color: var(--orange-primary) !important;
+}
+
+/* Submit button */
+.login-box .btn-primary,
+.register-box .btn-primary {
+    background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-dark) 100%) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px 30px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    width: 100% !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3) !important;
+}
+
+.login-box .btn-primary:hover,
+.register-box .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4) !important;
+}
+
+.login-box .btn-primary:active,
+.register-box .btn-primary:active {
+    transform: translateY(0) !important;
+}
+
+/* "Log in again" button on logout page */
+.login-box .btn-outline-primary,
+.register-box .btn-outline-primary {
+    border: 2px solid var(--orange-primary) !important;
+    color: var(--orange-primary) !important;
+    background: transparent !important;
+    border-radius: 10px !important;
+    padding: 12px 30px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    width: 100% !important;
+    transition: all 0.3s ease !important;
+}
+
+.login-box .btn-outline-primary:hover,
+.register-box .btn-outline-primary:hover {
+    background: var(--orange-primary) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3) !important;
+}
+
+/* Links (forgot password, etc.) */
+.login-box-msg,
+.register-box-msg {
+    text-align: center !important;
+    color: #6b7280 !important;
+    font-size: 15px !important;
+    margin-bottom: 20px !important;
+}
+
+.login-box a,
+.register-box a {
+    color: var(--orange-primary) !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    transition: color 0.3s ease !important;
+}
+
+.login-box a:hover,
+.register-box a:hover {
+    color: var(--orange-dark) !important;
+    text-decoration: underline !important;
+}
+
+/* Social login buttons (if any) */
+.login-box .btn-social,
+.register-box .btn-social {
+    border-radius: 10px !important;
+    padding: 10px !important;
+    margin: 5px 0 !important;
+}
+
+/* Remember me checkbox */
+.login-box .icheck-primary,
+.register-box .icheck-primary {
+    margin: 15px 0 !important;
+}
+
+.login-box .icheck-primary label,
+.register-box .icheck-primary label {
+    color: #6b7280 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+}
+
+/* Footer text */
+.login-box .card-footer,
+.register-box .card-footer {
+    background: #f9fafb !important;
+    border-top: 1px solid #e5e7eb !important;
+    text-align: center !important;
+    padding: 20px !important;
+}
+
+/* Error messages */
+.login-box .alert,
+.register-box .alert {
+    border-radius: 10px !important;
+    margin-bottom: 20px !important;
+}
+
+.login-box .alert-danger,
+.register-box .alert-danger {
+    background: #fee2e2 !important;
+    border: 2px solid #fecaca !important;
+    color: #991b1b !important;
+}
+
+/* ========== FIX HORIZONTAL SCROLLING ON MOBILE ========== */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden !important;
+    }
+    
+    .wrapper {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    .content-wrapper {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    .main-header .navbar,
+    .content-header,
+    .content {
+        min-width: unset !important;
+        max-width: 100vw !important;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        max-width: 100vw !important;
+    }
+    
+    /* Mobile login adjustments */
+    .login-box,
+    .register-box {
+        width: 95% !important;
+        margin: 20px auto !important;
+    }
+    
+    .login-box .card-body,
+    .register-box .card-body {
+        padding: 25px 20px !important;
+    }
+    
+    .login-logo img,
+    .register-logo img {
+        max-width: 120px !important;
+        max-height: 120px !important;
+    }
+}
+
+/* ========== FIX RECENT ACTIVITIES TITLE WRAPPING ========== */
+#content-related .card-header h3 {
+    width: 250px;
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    line-height: 1.3 !important;
+}
+
+#content-related .timeline > li > .timeline-item > .timeline-header {
+    word-wrap: break-word !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+}
+
+/* ========== ADDITIONAL NORTH DEVON BRANDING ========== */
+
+/* Add a subtle pattern to login background (optional) */
+.login-page::before,
+.register-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(249, 115, 22, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(234, 88, 12, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Add animation to login card */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-box .card,
+.register-box .card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Pulse animation for logo */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.login-logo img:hover,
+.register-logo img:hover {
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* Loading state for button */
+.login-box .btn-primary:disabled,
+.register-box .btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
