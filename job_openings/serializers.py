@@ -9,13 +9,14 @@ class JobSerializer(serializers.ModelSerializer):
     salary_range = serializers.ReadOnlyField()
     posted_date = serializers.ReadOnlyField()
     has_applied = serializers.SerializerMethodField()
+    slug = serializers.ReadOnlyField()
     
     class Meta:
         model = Job
         fields = [
             'id', 'title', 'company', 'location', 'job_type', 
             'salary_range', 'description', 'requirements', 
-            'is_active', 'created_at', 'posted_date', 'has_applied'
+            'is_active', 'created_at', 'posted_date', 'has_applied', 'slug'
         ]
 
     def get_has_applied(self, obj):
@@ -31,13 +32,14 @@ class JobSerializer(serializers.ModelSerializer):
 class JobApplicationSerializer(serializers.ModelSerializer):
     job_title = serializers.CharField(source='job.title', read_only=True)
     company_name = serializers.CharField(source='job.company', read_only=True)
+    job_slug = serializers.CharField(source='job.slug', read_only=True)
     applicant_name = serializers.CharField(source='applicant.get_full_name', read_only=True)
     applicant_email = serializers.CharField(source='applicant.email', read_only=True)
 
     class Meta:
         model = JobApplication
         fields = [
-            'id', 'job', 'job_title', 'company_name', 'applicant', 
+            'id', 'job', 'job_title', 'company_name', 'job_slug', 'applicant', 
             'applicant_name', 'applicant_email', 'resume', 'cover_letter',
             'years_of_experience', 'linkedin_url', 'portfolio_url',
             'status', 'applied_at'

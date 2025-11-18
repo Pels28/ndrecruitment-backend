@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.core.validators import FileExtensionValidator
+from django.utils.text import slugify
+from django.urls import reverse
 
 User = get_user_model()
 
@@ -22,6 +24,7 @@ class Job(models.Model):
     salary_max = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     description = models.TextField()
     requirements = models.TextField()
+    slug = models.SlugField(max_length=250, unique=True, blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -31,6 +34,22 @@ class Job(models.Model):
 
     def __str__(self):
         return f"{self.title} at {self.company}"
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            # Create a base slug from title and company
+            base_slug = slugify(f"{self.title} at {self.company}")
+            self.slug = base_slug
+            
+            # Ensure uniqueness
+            counter = 1
+            while Job.objects.filter(slug=self.slug).exists():
+                self.slug = f"{base_slug}-{counter}"
+                counter += 1
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('job-detail', kwargs={'slug': self.slug})
 
     @property
     def salary_range(self):
