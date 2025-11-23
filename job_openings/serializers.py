@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Job, JobApplication
 from django.contrib.auth import get_user_model
+import os
 
 User = get_user_model()
 
@@ -46,6 +47,32 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['applicant', 'status']
 
+# class JobApplicationCreateSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = JobApplication
+#         fields = [
+#             'job', 'resume', 'cover_letter', 'years_of_experience',
+#             'linkedin_url', 'portfolio_url'
+#         ]
+
+#     def validate(self, attrs):
+#         job = attrs.get('job')
+#         user = self.context['request'].user
+
+#         # Check if user has already applied to this job
+#         if JobApplication.objects.filter(job=job, applicant=user).exists():
+#             raise serializers.ValidationError("You have already applied to this job.")
+
+#         return attrs
+
+#     def create(self, validated_data):
+#         # Set the applicant to the current user
+#         validated_data['applicant'] = self.context['request'].user
+        
+#         # Create and return the JobApplication instance
+#         return JobApplication.objects.create(**validated_data)
+
+
 class JobApplicationCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobApplication
@@ -53,6 +80,25 @@ class JobApplicationCreateSerializer(serializers.ModelSerializer):
             'job', 'resume', 'cover_letter', 'years_of_experience',
             'linkedin_url', 'portfolio_url'
         ]
+
+    def validate_resume(self, value):
+        """Validate resume file extension"""
+        if value:
+            ext = os.path.splitext(value.name)[1].lower()
+            allowed_extensions = ['.pdf', '.doc', '.docx']
+            
+            if ext not in allowed_extensions:
+                raise serializers.ValidationError(
+                    f"Invalid file type. Allowed types: PDF, DOC, DOCX"
+                )
+            
+            # Optional: Check file size (5MB limit)
+            if value.size > 5 * 1024 * 1024:  # 5MB
+                raise serializers.ValidationError(
+                    "File size must be less than 5MB"
+                )
+        
+        return value
 
     def validate(self, attrs):
         job = attrs.get('job')

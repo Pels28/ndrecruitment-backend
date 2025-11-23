@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.core.validators import FileExtensionValidator
 from django.utils.text import slugify
 from django.urls import reverse
+from cloudinary.models import CloudinaryField  
 
 User = get_user_model()
 
@@ -103,9 +104,18 @@ class JobApplication(models.Model):
 
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='applications')
     applicant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job_applications')
-    resume = models.FileField(
-        upload_to='resumes/',
-        validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx'])]
+    # resume = models.FileField(
+    #     upload_to='resumes/',
+    #     validators=[FileExtensionValidator(allowed_extensions=['pdf', 'doc', 'docx'])]
+    # )
+    resume = CloudinaryField(
+        'resume',
+        resource_type='raw',  # Critical for non-image files like PDF, DOCX
+        folder='resumes',
+        null=True,
+        blank=True,
+        # Note: CloudinaryField doesn't support validators the same way
+        # You'll need to validate in the serializer or form
     )
     cover_letter = models.TextField(blank=True)
     years_of_experience = models.PositiveIntegerField(default=0)
